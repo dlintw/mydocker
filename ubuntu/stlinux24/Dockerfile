@@ -3,6 +3,7 @@
 # dockerfile ref: http://docs.docker.io/en/latest/use/builder/
 # command usage ref: http://docs.docker.io/en/latest/commandline/cli/
 # http://docs.docker.io/en/latest/use/port_redirection/#port-redirection
+# http://stlinux.com/install/ubuntu
 
 # Usage
 # =====
@@ -33,7 +34,7 @@ RUN wget -O /tmp/install http://ftp.stlinux.com/pub/stlinux/2.4/install
 RUN sh /tmp/install -d all-sh4-glibc
 # cache file puts in /var/cache/yum/x86_64/6/STLinux_Distribution_Updates/packages/
 
-RUN apt-get install -y rpm
+RUN apt-get install -y rpm python-urlgrabber python-rpm python-sqlitecachec
 RUN /opt/STM/STLinux-2.4/host/bin/stmyum clean dbcache packages
 
 RUN yum clean packages dbcache
