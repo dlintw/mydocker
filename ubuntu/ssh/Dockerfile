@@ -10,7 +10,7 @@ FROM ubuntu:12.04
 MAINTAINER Daniel YC Lin <dlin.tw at gmail>
 
 RUN apt-get update
-ADD ../../localtime /etc/localtime
+ADD localtime /etc/localtime
 
 RUN apt-get install -y git unzip subversion openssh-server gcc g++ make libreadline-dev unzip
 
