@@ -29,9 +29,10 @@ RUN echo 'root:root' | chpasswd
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]
 EXPOSE 22
 
+RUN ln -sf bash /bin/sh
 RUN wget -O /tmp/install http://ftp.stlinux.com/pub/stlinux/2.4/install
 #RUN sh /tmp/install || true
-RUN sh /tmp/install -d all-sh4-glibc
+RUN bash /tmp/install -d all-sh4-glibc
 # cache file puts in /var/cache/yum/x86_64/6/STLinux_Distribution_Updates/packages/
 
 RUN apt-get install -y rpm python-urlgrabber python-rpm python-sqlitecachec
