@@ -8,7 +8,7 @@
 # =====
 # # assume /tmp/root is your shared directory with this docker
 # # assume 20022 is your ssh port for this docker, password: root
-# docker run -v /tmp/root:/root -p 20022:22 dlin/centos-stlinux24
+# docker run -d -v /tmp/root:/root -p 20022:22 dlin/centos-stlinux24
 # ssh -p 20022 root@localhost
 
 FROM centos:6.4

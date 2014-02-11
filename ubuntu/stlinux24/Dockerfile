@@ -8,7 +8,7 @@
 # =====
 # # assume /tmp/root is your shared directory with this docker
 # # assume 20022 is your ssh port for this docker, password: root
-# docker run -v /tmp/root:/root -p 20022:22 dlin/ubuntu-stlinux24
+# docker run -d -v /tmp/root:/root -p 20022:22 dlin/ubuntu-stlinux24
 # ssh -p 20022 root@localhost
 
 FROM ubuntu:12.04
@@ -33,6 +33,8 @@ RUN wget -O /tmp/install http://ftp.stlinux.com/pub/stlinux/2.4/install
 RUN sh /tmp/install -d all-sh4-glibc
 # cache file puts in /var/cache/yum/x86_64/6/STLinux_Distribution_Updates/packages/
 
-RUN yum clean packages dbcache
+RUN apt-get install -y rpm
 RUN /opt/STM/STLinux-2.4/host/bin/stmyum clean dbcache packages
+
+RUN yum clean packages dbcache
 RUN rm -R /tmp/*
