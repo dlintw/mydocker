@@ -13,7 +13,7 @@ MAINTAINER Daniel YC Lin <dlin.tw at gmail>
 # ref: http://www.phcno1.net/modules/tad_book3/page.php?tbdsn=538
 
 ADD localtime /etc
-RUN yum update -y
+#RUN yum update -y
 
 RUN yum install -y git unzip subversion openssh-server gcc-c++ make readline-devel which unzip
 
