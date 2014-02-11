@@ -10,7 +10,7 @@ FROM ubuntu:12.04
 MAINTAINER Daniel YC Lin <dlin.tw at gmail>
 
 ADD localtime /etc
-RUN apt-get update -y
+RUN apt-get update
 
 RUN apt-get install -y git unzip subversion openssh-server gcc-c++ make readline-devel which unzip
 
