@@ -10,14 +10,15 @@ FROM ubuntu:12.04
 MAINTAINER Daniel YC Lin <dlin.tw at gmail>
 
 RUN apt-get update
-ADD localtime /etc/localtime
+ADD ../../localtime /etc/localtime
 
 RUN apt-get install -y git unzip subversion openssh-server gcc g++ make libreadline-dev unzip
 
 RUN wget -O /tmp/fossil.zip http://www.fossil-scm.org/download/fossil-linux-x86-20140127173344.zip
 RUN unzip -d /usr/bin /tmp/fossil.zip
 
-RUN /etc/init.d/sshd start
+RUN mkdir /var/run/sshd
+RUN /etc/init.d/ssh start
 RUN echo 'root:root' | chpasswd
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]
 EXPOSE 22
