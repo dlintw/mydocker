@@ -29,7 +29,7 @@ RUN echo 'root:root' | chpasswd
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]
 EXPOSE 22
 
-RUN apt-get install -y rpm python-urlgrabber python-rpm python-sqlitecachec
+RUN apt-get install -y rpm python-urlgrabber python-renderpm 
 
 RUN ln -sf bash /bin/sh
 RUN wget -O /tmp/install http://ftp.stlinux.com/pub/stlinux/2.4/install
