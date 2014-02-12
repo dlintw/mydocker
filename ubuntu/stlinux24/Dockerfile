@@ -31,7 +31,10 @@ EXPOSE 22
 
 RUN apt-get install -y rpm python-urlgrabber python-renderpm 
 
-RUN ln -sf bash /bin/sh
+# let bash be sh
+RUN echo "dash dash/sh boolean false" | debconf-set-selections
+RUN dpkg-reconfigure -p critical dash
+
 RUN wget -O /tmp/install http://ftp.stlinux.com/pub/stlinux/2.4/install
 #RUN sh /tmp/install || true
 RUN bash /tmp/install -d all-sh4-glibc
