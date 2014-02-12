@@ -33,7 +33,7 @@ RUN apt-get install -y rpm python-urlgrabber python-renderpm
 
 # let bash be sh
 RUN echo "dash dash/sh boolean false" | debconf-set-selections
-RUN dpkg-reconfigure -p critical dash
+RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
 
 RUN wget -O /tmp/install http://ftp.stlinux.com/pub/stlinux/2.4/install
 #RUN sh /tmp/install || true
