@@ -17,7 +17,7 @@ ADD localtime /etc/localtime
 RUN yum install -y git unzip subversion openssh-server gcc-c++ make readline-devel which unzip
 
 RUN wget -O /tmp/fossil.zip http://www.fossil-scm.org/download/fossil-linux-x86-20140127173344.zip
-RUN unzip -d /usr/bin /tmp/fossil.zip
+RUN unzip -d /usr/bin /tmp/fossil.zip && rm /tmp/fossil.zip
 
 RUN /etc/init.d/sshd start
 RUN echo 'root:root' | chpasswd
