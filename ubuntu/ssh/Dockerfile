@@ -1,10 +1,10 @@
-# dockerfile ref: http://docs.docker.io/en/latest/use/builder/
-# command usage ref: http://docs.docker.io/en/latest/commandline/cli/
-# http://docs.docker.io/en/latest/use/port_redirection/#port-redirection
+# Usage
+# =====
+# # assume /tmp/root is your shared directory with this docker
+# # assume 20022 is your ssh port for this docker, password: root
+# docker run -d -v /tmp/root:/root -p 20022:22 dlin/ubuntu-ssh
+# ssh -p 20022 root@localhost
 
-# docker build -t dlin/centos
-# docker -t -i -v /opt/tmp1:/tmp:rw dlin/centos  /bin/bash
-# docker -v /opt/tmp1:/tmp:rw -p 127.0.0.1:8888:8888 -p 127.0.0.1::20022:22 dlin/centos /usr/sbin/sshd -D
 
 FROM ubuntu:12.04
 MAINTAINER Daniel YC Lin <dlin.tw at gmail>

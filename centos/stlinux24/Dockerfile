@@ -1,9 +1,3 @@
-# References
-# ==========
-# dockerfile ref: http://docs.docker.io/en/latest/use/builder/
-# command usage ref: http://docs.docker.io/en/latest/commandline/cli/
-# http://docs.docker.io/en/latest/use/port_redirection/#port-redirection
-
 # Usage
 # =====
 # # assume /tmp/root is your shared directory with this docker
