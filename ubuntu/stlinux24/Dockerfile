@@ -43,5 +43,5 @@ RUN /opt/STM/STLinux-2.4/host/bin/stmyum clean dbcache packages
 RUN yum clean packages dbcache
 RUN rm -R /tmp/*
 
-#ENTRYPOINT ["/usr/sbin/sshd", "-D"]
-#EXPOSE 22
+ENTRYPOINT ["/usr/sbin/sshd", "-D"]
+EXPOSE 22
