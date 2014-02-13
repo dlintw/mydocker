@@ -40,7 +40,7 @@ RUN bash /tmp/install -u all-sh4-glibc
 RUN /opt/STM/STLinux-2.4/host/bin/stmyum update
 
 RUN /opt/STM/STLinux-2.4/host/bin/stmyum clean dbcache packages
-RUN yum clean packages dbcache
+RUN apt-get clean
 RUN rm -R /tmp/*
 
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]
