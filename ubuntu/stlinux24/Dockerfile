@@ -33,7 +33,7 @@ RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
 
 RUN wget -O /tmp/install http://ftp.stlinux.com/pub/stlinux/2.4/install
 RUN wget -O /tmp/dep.rpm http://download.stlinux.com/pub/stlinux/2.4/misc/stlinux24-host-STLinux_deps-20140120-1.i386.rpm
-RUN rpm -ivh --force-debian stlinux24-host-STLinux_deps-20140120-1.i386.rpm
+RUN rpm -ivh --force-debian /tmp/dep.rpm
 RUN bash /tmp/install -u all-sh4-glibc
 # cache file puts in /var/cache/yum/x86_64/6/STLinux_Distribution_Updates/packages/
 
