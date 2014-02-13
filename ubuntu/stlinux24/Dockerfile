@@ -1,8 +1,5 @@
 # References
 # ==========
-# dockerfile ref: http://docs.docker.io/en/latest/use/builder/
-# command usage ref: http://docs.docker.io/en/latest/commandline/cli/
-# http://docs.docker.io/en/latest/use/port_redirection/#port-redirection
 # http://stlinux.com/install/ubuntu
 
 # Usage
@@ -26,21 +23,25 @@ RUN unzip -d /usr/bin /tmp/fossil.zip
 RUN mkdir /var/run/sshd
 RUN /etc/init.d/ssh start
 RUN echo 'root:root' | chpasswd
-ENTRYPOINT ["/usr/sbin/sshd", "-D"]
-EXPOSE 22
 
-RUN apt-get install -y rpm python-urlgrabber python-renderpm 
+RUN apt-get install -y rpm python-urlgrabber python-rpm python-sqlitecachec \
+	python-libxml2
 
 # let bash be sh
 RUN echo "dash dash/sh boolean false" | debconf-set-selections
 RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
 
 RUN wget -O /tmp/install http://ftp.stlinux.com/pub/stlinux/2.4/install
-#RUN sh /tmp/install || true
-RUN bash /tmp/install -d all-sh4-glibc
+RUN wget -O /tmp/dep.rpm http://download.stlinux.com/pub/stlinux/2.4/misc/stlinux24-host-STLinux_deps-20140120-1.i386.rpm
+RUN rpm -ivh --force-debian stlinux24-host-STLinux_deps-20140120-1.i386.rpm
+RUN bash /tmp/install -u all-sh4-glibc
 # cache file puts in /var/cache/yum/x86_64/6/STLinux_Distribution_Updates/packages/
 
-RUN /opt/STM/STLinux-2.4/host/bin/stmyum clean dbcache packages
+RUN /opt/STM/STLinux-2.4/host/bin/stmyum update
 
+RUN /opt/STM/STLinux-2.4/host/bin/stmyum clean dbcache packages
 RUN yum clean packages dbcache
 RUN rm -R /tmp/*
+
+#ENTRYPOINT ["/usr/sbin/sshd", "-D"]
+#EXPOSE 22
