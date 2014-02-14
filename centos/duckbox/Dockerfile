@@ -13,7 +13,8 @@ ADD localtime /etc/localtime
 
 RUN yum install -y git unzip subversion openssh-server gcc-c++ make \
   readline-devel which unzip gettext-devel libtool autoconf automake \
-  flex bison redhat-lsb rpm-build glib2-devel zlib-devel glibc-static
+  flex bison redhat-lsb rpm-build glib2-devel zlib-devel glibc-static \
+  texinfo
 
 RUN /etc/init.d/sshd start
 RUN echo 'root:root' | chpasswd
