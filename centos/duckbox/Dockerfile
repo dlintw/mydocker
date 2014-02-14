@@ -37,6 +37,7 @@ RUN wget -O/tmp/cdk.zip https://www.dropbox.com/s/fh5ae25j3nc03dq/cdk.zip
 
 RUN unzip -d tdt/tdt/cvs/cdk -o /tmp/cdk.zip
 WORKDIR tdt/tdt/cvs/cdk
+RUN sed -i -e 's,ftp://,http://,' rules-archive
 RUN yum install -y gettext-devel libtool autoconf automake \
 	flex bison redhat-lsb
 RUN ./make.sh 20 4 y 2 1 3 1 2
