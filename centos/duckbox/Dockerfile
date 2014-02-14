@@ -2,7 +2,7 @@
 # =====
 # # assume /tmp/root is your shared directory with this docker
 # # assume 20022 is your ssh port for this docker, password: root
-# docker run -d -v /tmp/root:/root -p 20022:22 dlin/centos-stlinux24
+# docker run -d -v /tmp/root:/root -p 20022:22 dlin/centos-duckbox
 # ssh -p 20022 root@localhost
 
 FROM centos:6.4
@@ -14,8 +14,7 @@ MAINTAINER Daniel YC Lin <dlin.tw at gmail>
 RUN yum update -y
 ADD localtime /etc/localtime
 
-RUN yum install -y git unzip subversion openssh-server \
-	gcc-c++ make readline-devel which unzip
+RUN yum install -y git unzip subversion openssh-server gcc-c++ make readline-devel which unzip
 
 RUN wget -O /tmp/fossil.zip http://www.fossil-scm.org/download/fossil-linux-x86-20140127173344.zip
 RUN unzip -d /usr/bin /tmp/fossil.zip
@@ -24,6 +23,7 @@ RUN /etc/init.d/sshd start
 RUN echo 'root:root' | chpasswd
 
 RUN wget -O /tmp/install http://ftp.stlinux.com/pub/stlinux/2.4/install
+#RUN sh /tmp/install || true
 RUN sh /tmp/install all-sh4-glibc
 # cache file puts in /var/cache/yum/x86_64/6/STLinux_Distribution_Updates/packages/
 
@@ -31,5 +31,15 @@ RUN yum clean packages dbcache
 RUN /opt/STM/STLinux-2.4/host/bin/stmyum clean dbcache packages
 RUN rm -R /tmp/*
 
-ENTRYPOINT ["/usr/sbin/sshd", "-D"]
-EXPOSE 22
+RUN git clone https://git.gitorious.org/open-duckbox-project-sh4/tdt.git
+
+RUN wget -O/tmp/cdk.zip https://www.dropbox.com/s/fh5ae25j3nc03dq/cdk.zip
+
+RUN unzip -d tdt/tdt/cvs/cdk -o /tmp/cdk.zip
+WORKDIR tdt/tdt/cvs/cdk
+RUN yum install -y gettext-devel libtool autoconf automake \
+	flex bison redhat-lsb
+RUN ./make.sh 20 4 y 2 1 3 1 2
+RUN make yaud-xbmc-nightly
+#ENTRYPOINT ["/usr/sbin/sshd", "-D"]
+#EXPOSE 22
