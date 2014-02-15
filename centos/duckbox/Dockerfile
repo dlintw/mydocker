@@ -12,9 +12,14 @@ RUN yum update -y
 ADD localtime /etc/localtime
 
 RUN yum install -y git unzip subversion openssh-server gcc-c++ make \
-  readline-devel which unzip gettext-devel libtool autoconf automake \
+  readline-devel which unzip gettext-devel libtool automake \
   flex bison redhat-lsb rpm-build glib2-devel zlib-devel glibc-static \
   texinfo
+
+# install autoconf 2.65 http://www.humani-tech.com/?p=339
+RUN wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.65.tar.gz && \
+  tar xf autoconf-2.65.tar.gz && cd autoconf-2.65 && \
+  ./configure && make && make install && rm -rf autoconf-2.65*
 
 RUN /etc/init.d/sshd start
 RUN echo 'root:root' | chpasswd
@@ -26,5 +31,5 @@ RUN wget -O/tmp/cdk.zip https://www.dropbox.com/s/fh5ae25j3nc03dq/cdk.zip
 RUN unzip -d tdt/tdt/cvs/cdk -o /tmp/cdk.zip
 #WORKDIR tdt/tdt/cvs/cdk
 #RUN sed -i -e 's,ftp://,http://,' rules-archive
-RUN ./make.sh 20 4 y 2 1 3 1 2
+RUN cd /tdt/tdt/cvs/cdk && ./make.sh 20 4 y 2 1 3 1 2
 #RUN make yaud-xbmc-nightly
