@@ -12,14 +12,19 @@ RUN yum update -y
 ADD localtime /etc/localtime
 
 RUN yum install -y git unzip subversion openssh-server gcc-c++ make \
-  readline-devel which unzip gettext-devel libtool automake \
+  readline-devel which unzip gettext-devel libtool \
   flex bison redhat-lsb rpm-build glib2-devel zlib-devel glibc-static \
   texinfo
 
 # install autoconf 2.65 http://www.humani-tech.com/?p=339
 RUN wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.65.tar.gz && \
   tar xf autoconf-2.65.tar.gz && cd autoconf-2.65 && \
-  ./configure && make && make install && rm -rf autoconf-2.65*
+  ./configure && make && make install && cd .. && rm -rf autoconf-2.65*
+
+# install automake 1.14.1
+RUN wget http://ftp.gnu.org/gnu/automake/automake-1.14.1.tar.xz && \
+  tar xf automake-1.14.1.tar.xz && cd automake-1.14.1 && \
+  ./configure && make && make install && cd .. && rm -rf automake-1.14.1*
 
 RUN /etc/init.d/sshd start
 RUN echo 'root:root' | chpasswd
