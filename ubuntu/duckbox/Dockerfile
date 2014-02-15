@@ -11,10 +11,12 @@ MAINTAINER Daniel YC Lin <dlin.tw at gmail>
 RUN apt-get update
 ADD localtime /etc/localtime
 
+RUN ln -sf bash /bin/sh
 RUN apt-get install -y git unzip subversion openssh-server gcc g++ make \
-  libreadline-dev unzip gettext-base libtool automake autoconf \
-  flex bison libglib2.0-dev zlib1g-dev texinfo
-  #redhat-lsb rpm-build glibc-static
+  libreadline-dev unzip gettext libtool automake autoconf \
+  flex bison libglib2.0-dev zlib1g-dev texinfo rpm bzip2 libncurses5-dev \
+  ccache gawk fakeroot xfslibs-dev swig pkg-config
+  #redhat-lsb glibc-static automake-1.11.3 autoconf-2.68
 
 RUN wget -O /tmp/fossil.zip \
   http://www.fossil-scm.org/download/fossil-linux-x86-20140127173344.zip \

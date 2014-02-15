@@ -16,10 +16,10 @@ RUN yum install -y git unzip subversion openssh-server gcc-c++ make \
   flex bison redhat-lsb rpm-build glib2-devel zlib-devel glibc-static \
   texinfo
 
-# install autoconf 2.65 http://www.humani-tech.com/?p=339
-RUN wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.65.tar.gz && \
-  tar xf autoconf-2.65.tar.gz && cd autoconf-2.65 && \
-  ./configure && make && make install && cd .. && rm -rf autoconf-2.65*
+# install autoconf 2.68 http://www.humani-tech.com/?p=339
+RUN wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.68.tar.xz && \
+  tar xf autoconf-2.68.tar.xz && cd autoconf-2.68 && \
+  ./configure && make && make install && cd .. && rm -rf autoconf-2.68*
 
 # install automake 1.14.1
 RUN wget http://ftp.gnu.org/gnu/automake/automake-1.14.1.tar.xz && \
