@@ -1,9 +1,6 @@
 # Usage
 # =====
-# mkdir -p /Archive # for keep downloaded sources
-# docker run -t -i -v /Archive:/Archive dlin/ubuntu-duckbox /bin/bash
-# cd /pdk7105-tdt/tdt/cvs/cdk && git pull
-# make -j$((`nproc` + 1)) yaud-xbmc-nightly
+# ref: https://github.com/dlintw/mydocker/blob/master/ubuntu/duckbox/run.sh
 
 FROM ubuntu:12.04
 MAINTAINER Daniel YC Lin <dlin.tw at gmail>
@@ -11,6 +8,7 @@ MAINTAINER Daniel YC Lin <dlin.tw at gmail>
 RUN ln -sf /usr/share/zoninfo/Asia/Taipei /etc/localtime
 RUN ln -sf bash /bin/sh
 RUN apt-get update
+# Bug? when upgrade, it occurs some package conflict error
 #RUN apt-get upgrade
 
 RUN apt-get install -y git unzip subversion openssh-server gcc g++ make \
@@ -29,14 +27,6 @@ RUN echo 'root:root' | chpasswd
 
 RUN mkdir /Archive
 
-# old method
-#RUN git clone https://git.gitorious.org/open-duckbox-project-sh4/tdt.git
-#WORKDIR tdt/tdt/cvs/cdk
-#RUN sed -i -e 's,ftp://,http://,' rules-archive
-
-# extra required packages
-# /Archive/pcre-8.30.tar.bz2 http://ftp.cs.stanford.edu/pub/exim/pcre/pcre-8.30.tar.bz2
-# /Archive/tinyxml_2_6_2.tar.gz http://download.sf.net/tinyxml/2.6.2/tinyxml_2_6_2.tar.gz
 
 RUN git clone https://github.com/dlintw/pdk7105-tdt
 RUN cd /pdk7105-tdt/tdt/cvs/cdk && ./make.sh 20 4 y 2 1 2 1 2
