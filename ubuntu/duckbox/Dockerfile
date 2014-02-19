@@ -2,11 +2,8 @@
 # =====
 # mkdir -p /Archive # for keep downloaded sources
 # docker run -t -i -v /Archive:/Archive dlin/ubuntu-duckbox /bin/bash
-# cd /pdk7105-tdt/tdt/cvs/cdk 
-# git pull && git checkout pdk7150
-# # Assume you have 4 cpu cores, assign 5(=4+1) jobs to build.
-# make -j5 yaud-xbmc-nightly
-# In the REVISIONS menu, choose 5)Frodo_rc3
+# cd /pdk7105-tdt/tdt/cvs/cdk && git pull
+# make -j$((`nproc` + 1)) yaud-xbmc-nightly
 
 FROM ubuntu:12.04
 MAINTAINER Daniel YC Lin <dlin.tw at gmail>
@@ -41,10 +38,10 @@ RUN mkdir /Archive
 # /Archive/pcre-8.30.tar.bz2 http://ftp.cs.stanford.edu/pub/exim/pcre/pcre-8.30.tar.bz2
 # /Archive/tinyxml_2_6_2.tar.gz http://download.sf.net/tinyxml/2.6.2/tinyxml_2_6_2.tar.gz
 
-RUN git clone https://github.com/dlintw/pdk7105-tdt && cd /pdk7105-tdt \
-  && git checkout pdk7105
+RUN git clone https://github.com/dlintw/pdk7105-tdt
 RUN cd /pdk7105-tdt/tdt/cvs/cdk && ./make.sh 20 4 y 2 1 2 1 2
 
+ADD build.sh /build.sh
 #RUN make -j$((`nproc` + 1)) yaud-xbmc-nightly
 
 #ENTRYPOINT ["/usr/sbin/sshd", "-D"]
