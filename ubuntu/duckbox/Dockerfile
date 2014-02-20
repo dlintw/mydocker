@@ -15,7 +15,7 @@ RUN apt-get install -y git unzip subversion openssh-server gcc g++ make \
   libreadline-dev unzip gettext libtool automake autoconf \
   flex bison libglib2.0-dev zlib1g-dev texinfo rpm bzip2 libncurses5-dev \
   ccache gawk fakeroot xfslibs-dev swig pkg-config \
-  autopoint ruby cmake doxygen default-jdk
+  autopoint ruby cmake doxygen default-jdk gperf zip
 
 RUN wget -O /tmp/fossil.zip \
   http://www.fossil-scm.org/download/fossil-linux-x86-20140127173344.zip \
