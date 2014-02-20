@@ -34,5 +34,5 @@ RUN mkdir -p /Archive /pdk7105-tdt
 ADD build.sh /build.sh
 #RUN make -j$((`nproc` + 1)) yaud-xbmc-nightly
 
-ENTRYPOINT ["/usr/sbin/sshd", "-D"]
-EXPOSE 22
+#ENTRYPOINT ["/usr/sbin/sshd", "-D"]
+#EXPOSE 22
