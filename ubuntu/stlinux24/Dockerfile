@@ -13,19 +13,16 @@ FROM ubuntu:12.04
 MAINTAINER Daniel YC Lin <dlin.tw at gmail>
 
 RUN apt-get update
-ADD localtime /etc/localtime
-
-RUN apt-get install -y git unzip subversion openssh-server gcc g++ make libreadline-dev unzip
+RUN apt-get install -y git unzip subversion openssh-server gcc g++ make \
+  libreadline-dev unzip install -y rpm python-urlgrabber python-rpm \
+  python-sqlitecachec python-libxml2
 
 RUN wget -O /tmp/fossil.zip http://www.fossil-scm.org/download/fossil-linux-x86-20140127173344.zip
 RUN unzip -d /usr/bin /tmp/fossil.zip
 
-RUN mkdir /var/run/sshd
-RUN /etc/init.d/ssh start
+RUN ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+RUN mkdir /var/run/sshd && chmod 755 /var/run/sshd && start ssh
 RUN echo 'root:root' | chpasswd
-
-RUN apt-get install -y rpm python-urlgrabber python-rpm python-sqlitecachec \
-	python-libxml2
 
 # let bash be sh
 RUN echo "dash dash/sh boolean false" | debconf-set-selections
