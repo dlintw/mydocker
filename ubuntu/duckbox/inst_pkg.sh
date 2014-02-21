@@ -114,6 +114,5 @@ texinfo \
 unzip \
 vim \
 xfslibs-dev \
-yasm \
 zip \
 zlib1g-dev \

@@ -23,11 +23,7 @@ RUN echo 'root:root' | chpasswd
 
 RUN mkdir -p /Archive /pdk7105-tdt
 
-#RUN git clone https://github.com/dlintw/pdk7105-tdt
-#RUN cd /pdk7105-tdt/tdt/cvs/cdk && ./make.sh 20 4 y 2 1 2 1 2
-
 ADD build.sh /build.sh
-#RUN make -j$((`nproc` + 1)) yaud-xbmc-nightly
 
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]
 EXPOSE 22

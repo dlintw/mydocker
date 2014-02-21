@@ -5,5 +5,10 @@ cd /pdk7105-tdt/tdt/cvs/cdk
 [ -r Makefile ] || ./make.sh 20 4 y 2 1 2 1 2
 git remote -v
 git pull origin master
-make -j$((`nproc` + 1)) yaud-xbmc-nightly \
+set -e
+if ! make -j$((`nproc` + 1)) yaud-xbmc-nightly \
+    |& tee -a make.`date +%y%m%d%H%M%S`.log ; then
+  make -j$((`nproc` + 1)) yaud-xbmc-nightly \
   |& tee -a make.`date +%y%m%d%H%M%S`.log
+fi
+echo "OK rootfs: /pdk7105-tdt/tdt/tufsbox/release/"
