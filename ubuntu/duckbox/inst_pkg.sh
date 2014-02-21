@@ -1,4 +1,4 @@
-[ `uname -m` = x86_64] && apt-get install -y gcc-multilib
+[ `uname -m` = x86_64 ] && apt-get install -y gcc-multilib
 
 apt-get install -y \
 autoconf \
