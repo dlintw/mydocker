@@ -12,3 +12,6 @@ if ! make -j$((`nproc` + 1)) yaud-xbmc-nightly \
   |& tee -a make.`date +%y%m%d%H%M%S`.log
 fi
 echo "OK rootfs: /pdk7105-tdt/tdt/tufsbox/release/"
+T=/Archive/`date +%Y%m%d`.txz
+tar -C /pdk7105-tdt/tdt/tufsbox/release/ -cJf $T .
+ls -l $T
