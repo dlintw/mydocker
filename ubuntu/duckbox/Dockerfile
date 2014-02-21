@@ -11,8 +11,8 @@ RUN apt-get update
 # Bug? when upgrade, it occurs some package conflict error
 #RUN apt-get upgrade
 
-ADD packages.txt /tmp/packages.txt
-RUN apt-get install -y `/tmp/packages.txt`
+ADD inst_pkg.sh /tmp/inst_pkg.sh
+RUN sh /tmp/inst_pkg.sh
 
 RUN wget -O /tmp/fossil.zip \
   http://www.fossil-scm.org/download/fossil-linux-x86-20140127173344.zip \
