@@ -2,15 +2,8 @@
 # =====
 # ref: https://github.com/dlintw/mydocker/blob/master/ubuntu/duckbox/run.sh
 
-FROM ubuntu:12.04
-MAINTAINER Daniel YC Lin <dlin.tw at gmail>
-
-RUN ln -sf /usr/share/zoninfo/Asia/Taipei /etc/localtime
+FROM dlin/ubuntu-ssh
 RUN ln -sf bash /bin/sh
-RUN apt-get update
-# Bug? when upgrade, it occurs some package conflict error
-#RUN apt-get upgrade
-
 ADD inst_pkg.sh /tmp/inst_pkg.sh
 RUN sh /tmp/inst_pkg.sh
 
@@ -24,6 +17,5 @@ RUN echo 'root:root' | chpasswd
 RUN mkdir -p /Archive /pdk7105-tdt
 
 ADD build.sh /build.sh
-
-ENTRYPOINT ["/usr/sbin/sshd", "-D"]
-EXPOSE 22
+#ENTRYPOINT ["/usr/sbin/sshd", "-D"]
+#EXPOSE 22
