@@ -11,11 +11,8 @@ RUN apt-get update
 # Bug? when upgrade, it occurs some package conflict error
 #RUN apt-get upgrade
 
-RUN apt-get install -y git unzip subversion openssh-server gcc g++ make \
-  libreadline-dev unzip gettext libtool automake autoconf \
-  flex bison libglib2.0-dev zlib1g-dev texinfo rpm bzip2 libncurses5-dev \
-  ccache gawk fakeroot xfslibs-dev swig pkg-config \
-  autopoint ruby cmake doxygen default-jdk gperf zip
+ADD packages.txt /tmp/packages.txt
+RUN apt-get install -y `/tmp/packages.txt`
 
 RUN wget -O /tmp/fossil.zip \
   http://www.fossil-scm.org/download/fossil-linux-x86-20140127173344.zip \
