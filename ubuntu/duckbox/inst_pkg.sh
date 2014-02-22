@@ -37,7 +37,6 @@ libboost-dev \
 libboost-thread-dev \
 libbz2-dev \
 libcap-dev \
-libcdio-dev \
 libcec-dev \
 libcrystalhd-dev \
 libcurl4-openssl-dev \
@@ -116,3 +115,5 @@ vim \
 xfslibs-dev \
 zip \
 zlib1g-dev \
+
+# libcdio-dev \
