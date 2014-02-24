@@ -3,9 +3,11 @@
 [ -d /Archive ] || mkdir /Archive
 echo "Note:After enter docker containner, run '. /build.sh' to build"
 img=${1:-dlin/ubuntu-duckbox}
-port=${2:-20022}
-#docker run -t -i -v /Archive:/Archive -v /tdt:/pdk7105-tdt -p $port:22 $img /bin/bash
-docker run -d -v /Archive:/Archive -v /tdt:/pdk7105-tdt -p $port:22 $img \
-  /usr/sbin/sshd -D
+if [ -n "$2" ] ; then
+  port="-p $2:22"
+else
+  port="-p 22"
+fi
+id=`docker run -d -v /Archive:/Archive -v /tdt:/pdk7105-tdt $port $img /usr/sbin/sshd -D`
 echo "default password is root, change it after login"
-echo "ssh -p$port root@localhost"
+echo "ssh -p`docker port $id 22` root@localhost"

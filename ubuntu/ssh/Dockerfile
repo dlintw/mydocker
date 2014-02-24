@@ -22,4 +22,4 @@ RUN mkdir /var/run/sshd && chmod 755 /var/run/sshd && start ssh
 RUN echo 'root:root' | chpasswd
 
 #ENTRYPOINT ["/usr/sbin/sshd", "-D"]
-#EXPOSE 22
+EXPOSE 22
