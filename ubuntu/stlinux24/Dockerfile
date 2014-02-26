@@ -4,29 +4,19 @@
 
 # Usage
 # =====
-# # assume /tmp/root is your shared directory with this docker
-# # assume 20022 is your ssh port for this docker, password: root
-# docker run -d -v /tmp/root:/root -p 20022:22 dlin/ubuntu-stlinux24
-# ssh -p 20022 root@localhost
+# ref: https://github.com/dlintw/mydocker/blob/master/ubuntu/stlinux24/run.sh
 
-FROM ubuntu:12.04
-MAINTAINER Daniel YC Lin <dlin.tw at gmail>
+FROM dlin/ubuntu-ssh
 
-RUN apt-get update
-RUN apt-get install -y git unzip subversion openssh-server gcc g++ make \
-  libreadline-dev unzip install -y rpm python-urlgrabber python-rpm \
-  python-sqlitecachec python-libxml2
+# let bash be sh
+#RUN echo "dash dash/sh boolean false" | debconf-set-selections
+#RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
+RUN ln -sf bash /bin/sh
+ADD inst_pkg.sh /tmp/inst_pkg.sh
+RUN sh /tmp/inst_pkg.sh
 
 RUN wget -O /tmp/fossil.zip http://www.fossil-scm.org/download/fossil-linux-x86-20140127173344.zip
 RUN unzip -d /usr/bin /tmp/fossil.zip
-
-RUN ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
-RUN mkdir /var/run/sshd && chmod 755 /var/run/sshd && start ssh
-RUN echo 'root:root' | chpasswd
-
-# let bash be sh
-RUN echo "dash dash/sh boolean false" | debconf-set-selections
-RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
 
 RUN wget -O /tmp/install http://ftp.stlinux.com/pub/stlinux/2.4/install
 RUN wget -O /tmp/dep.rpm http://download.stlinux.com/pub/stlinux/2.4/misc/stlinux24-host-STLinux_deps-20140120-1.i386.rpm
@@ -35,10 +25,7 @@ RUN bash /tmp/install -u all-sh4-glibc
 # cache file puts in /var/cache/yum/x86_64/6/STLinux_Distribution_Updates/packages/
 
 RUN /opt/STM/STLinux-2.4/host/bin/stmyum update
-
 RUN /opt/STM/STLinux-2.4/host/bin/stmyum clean dbcache packages
-RUN apt-get clean
-RUN rm -R /tmp/*
+#RUN apt-get clean
+#RUN rm -R /tmp/*
 
-ENTRYPOINT ["/usr/sbin/sshd", "-D"]
-EXPOSE 22
