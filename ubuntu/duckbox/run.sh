@@ -11,7 +11,7 @@ if  ! groups | grep '\bdocker\b' >/dev/null && [ `id -u` != 0 ] ; then
 fi
 [ -d /Archive ] || mkdir /Archive
 [ -d /tdt ] || mkdir /tdt
-
+cp build.sh /Archive
 
 img=${2:-dlin/ubuntu-duckbox}
 if [ -n "$3" ] ; then
@@ -21,12 +21,12 @@ else
 fi
 set -x
 if [ "$1" = build ] ; then
-  docker run -t -i -v /Archive:/Archive -v /tdt:/pdk7105-tdt $port $img bash /build.sh
+  docker run -t -i -v /Archive:/Archive -v /tdt:/tdt $port $img bash /Archive/build.sh
 elif [ "$1" = ssh ] ; then
-  id=`docker run -d -v /Archive:/Archive -v /tdt:/pdk7105-tdt $port $img /usr/sbin/sshd -D`
+  id=`docker run -d -v /Archive:/Archive -v /tdt:/tdt $port $img /usr/sbin/sshd -D`
   echo "default password is root, change it after login"
   echo "ssh -p`docker port $id 22` root@localhost"
-  echo "Note:After enter docker container, run '. /build.sh' to build"
+  echo "Note:After enter docker container, run '. /Archive/build.sh' to build"
 else
   echo "Err: invalid option $1"
   exit 1

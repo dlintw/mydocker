@@ -5,7 +5,7 @@
 # docker run -d -v /tmp/root:/root -p 20022:22 dlin/ubuntu-ssh /usr/sbin/sshd -D
 # ssh -p 20022 root@localhost
 
-FROM ubuntu:12.04
+FROM stackbrew/ubuntu:12.04
 MAINTAINER Daniel YC Lin <dlin.tw at gmail>
 
 # original /etc/apt/sources.list
@@ -13,8 +13,9 @@ MAINTAINER Daniel YC Lin <dlin.tw at gmail>
 # deb http://archive.ubuntu.com/ubuntu precise-updates main universe
 # deb http://archive.ubuntu.com/ubuntu precise-security main universe
 
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > \
-  /etc/apt/sources.list && apt-get update && apt-get -y upgrade
+#RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > \
+#  /etc/apt/sources.list && apt-get update && apt-get -y upgrade
+RUN apt-get update && apt-get -y upgrade
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 RUN apt-get install -y zip unzip openssh-server
