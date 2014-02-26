@@ -5,7 +5,8 @@
 # docker run -d -v /tmp/root:/root -p 20022:22 dlin/ubuntu-ssh /usr/sbin/sshd -D
 # ssh -p 20022 root@localhost
 
-FROM stackbrew/ubuntu:12.04
+#FROM stackbrew/ubuntu:12.04
+FROM racker/precise-with-updates
 MAINTAINER Daniel YC Lin <dlin.tw at gmail>
 
 # original /etc/apt/sources.list
