@@ -11,3 +11,6 @@ RUN wget -O /tmp/fossil.zip \
   && unzip -d /usr/bin /tmp/fossil.zip && rm /tmp/fossil.zip
 
 RUN mkdir -p /Archive /tdt
+
+# for build pdk7105-tdt version b9ac
+RUN apt-get install -y intltool
