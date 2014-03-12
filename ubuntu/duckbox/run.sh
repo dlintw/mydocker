@@ -23,7 +23,8 @@ set -x
 if [ "$1" = build ] ; then
   docker run -rm -t -i -v /Archive:/Archive -v /tdt:/tdt $port $img bash /Archive/build.sh
 elif [ "$1" = ssh ] ; then
-  id=`docker run -rm -d -v /Archive:/Archive -v /tdt:/tdt $port $img /usr/sbin/sshd -D`
+  id=`docker run -d -v /Archive:/Archive -v /tdt:/tdt $port $img
+    /bin/bash 'mkdir /var/run/sshd && /usr/sbin/sshd -D'`
   echo "default password is root, change it after login"
   echo "ssh -p`docker port $id 22` root@localhost"
   echo "Note:After enter docker container, run '. /Archive/build.sh' to build"
